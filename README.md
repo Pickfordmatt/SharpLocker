@@ -1,2 +1,2 @@
 # SharpLocker
-![Working SharpLocker](https://raw.githubusercontent.com/Pickfordmatt/SharpLocker/master/SharpLocker.png)
+![Working SharpLocker](https://github.com/Pickfordmatt/SharpLocker/blob/master/sharplocker.png?raw=true)
