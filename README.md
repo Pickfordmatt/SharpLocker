@@ -8,7 +8,7 @@ SharpLocker helps get current user credentials by popping a fake Windows lock sc
 * Main monitor needs to be 1080p otherwise the location of the elements are wrong
 
 ## In Progress
-* Backwards compatability for Win 7
+* Backwards compatibility for Win 7
 * All resolution support
 
 
