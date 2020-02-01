@@ -17,6 +17,25 @@ namespace WindowsFormsApp9
 {
     public partial class Form1 : Form
     {
+        [DllImport("shell32.dll", EntryPoint = "#261",
+               CharSet = CharSet.Unicode, PreserveSig = false)]
+        public static extern void GetUserTilePath(
+      string username,
+      UInt32 whatever, // 0x80000000
+      StringBuilder picpath, int maxLength);
+
+        public static string GetUserTilePath(string username)
+        {   // username: use null for current user
+            var sb = new StringBuilder(1000);
+            GetUserTilePath(username, 0x80000000, sb, sb.Capacity);
+            return sb.ToString();
+        }
+
+        public static Image GetUserTile(string username)
+        {
+            return Image.FromFile(GetUserTilePath(username));
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +49,9 @@ namespace WindowsFormsApp9
             //Creds to keldnorman
             //https://github.com/Pickfordmatt/SharpLocker/issues/2
             Image myimage = new Bitmap(@Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft\\Windows\\Themes\\TranscodedWallpaper"));
-            
+            //---
+
+
             BackgroundImage = myimage;
             BackgroundImageLayout = ImageLayout.Stretch;
             this.TopMost = true;
@@ -55,6 +76,13 @@ namespace WindowsFormsApp9
 
             //Set the text
             label2.Text = userNameText.Split('\\')[1];
+
+            //https://stackoverflow.com/questions/7731855/rounded-edges-in-picturebox-c-sharp
+            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            gp.AddEllipse(0, 0, pictureBox1.Width - 3, pictureBox1.Height - 3);
+            Region rg = new Region(gp);
+            pictureBox1.Region = rg;
+            pictureBox1.Image = GetUserTile(userNameText.Split('\\')[1]);
 
             foreach (var screen in Screen.AllScreens)
             {
