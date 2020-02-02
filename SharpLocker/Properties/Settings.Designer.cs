@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp9.Properties
+namespace SharpLocker.Properties
 {
 
 
