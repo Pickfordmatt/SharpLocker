@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -18,7 +19,7 @@ namespace WindowsFormsApp9
             StartPosition = FormStartPosition.Manual;
             Location = new Point(0, 0);
             Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            Image myimage = new Bitmap(@"C:\Windows\Web\Wallpaper\Windows\img0.jpg");
+            Image myimage = new Bitmap(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), @"Web\Wallpaper\Windows\img0.jpg"));
             BackgroundImage = myimage;
             BackgroundImageLayout = ImageLayout.Stretch;
             this.TopMost = true;
