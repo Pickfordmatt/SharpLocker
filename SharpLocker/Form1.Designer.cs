@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp9
+﻿namespace SharpLocker
 {
     partial class Form1
     {
@@ -81,7 +81,7 @@
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = global::WindowsFormsApp9.Properties.Resources.thumb_14400082930User;
+            this.pictureBox1.Image = global::SharpLocker.Properties.Resources.thumb_14400082930User;
             this.pictureBox1.Location = new System.Drawing.Point(345, 31);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(199, 199);
@@ -95,7 +95,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.AutoSize = true;
             this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = global::WindowsFormsApp9.Properties.Resources.arrow;
+            this.button1.BackgroundImage = global::SharpLocker.Properties.Resources.arrow;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Location = new System.Drawing.Point(597, 324);
             this.button1.Name = "button1";

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A6F8500F-68BC-4EFC-962A-6C6E68D893AF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WindowsFormsApp9</RootNamespace>
-    <AssemblyName>WindowsFormsApp9</AssemblyName>
+    <RootNamespace>SharpLocker</RootNamespace>
+    <AssemblyName>SharpLocker</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
