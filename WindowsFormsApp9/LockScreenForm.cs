@@ -10,7 +10,7 @@ using System.IO;
 
 namespace WindowsFormsApp9
 {
-    public partial class Form1 : Form
+    public partial class LockScreenForm : Form
     {
         [DllImport("shell32.dll", EntryPoint = "#261",
         CharSet = CharSet.Unicode, PreserveSig = false)]
@@ -26,7 +26,7 @@ namespace WindowsFormsApp9
             return sb.ToString();
         }
 
-        public Form1()
+        public LockScreenForm()
         {
             InitializeComponent();
             Taskbar.Hide();
@@ -46,33 +46,33 @@ namespace WindowsFormsApp9
             BackgroundImageLayout = ImageLayout.Stretch;
             this.TopMost = true;
             string userName = System.Environment.UserName.ToString();
-            label2.Text = userName;
-            label2.BackColor = System.Drawing.Color.Transparent;
+            NameLabel.Text = userName;
+            NameLabel.BackColor = System.Drawing.Color.Transparent;
             int usernameloch = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 64;
             int usericonh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 29;
             int buttonh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 64;
             int usernameh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 50;
             int locked = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 57;
             int bottomname = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 95;
-            textBox2.Top = usernameloch;
-            pictureBox1.Top = usericonh;
-            button1.Top = buttonh;
-            label2.Top = usernameh;
-            label1.Top = locked;
-            textBox2.UseSystemPasswordChar = true;
+            PasswordTextBox.Top = usernameloch;
+            ProfilePictureBox.Top = usericonh;
+            LoginButton.Top = buttonh;
+            NameLabel.Top = usernameh;
+            LockedLabel.Top = locked;
+            PasswordTextBox.UseSystemPasswordChar = true;
 
             //Get the username. This returns Domain\Username
             string userNameText = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
             //Set the text
-            label2.Text = userNameText.Split('\\')[1];
+            NameLabel.Text = userNameText.Split('\\')[1];
 
             //https://stackoverflow.com/questions/7731855/rounded-edges-in-picturebox-c-sharp
             System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
-            gp.AddEllipse(0, 0, pictureBox1.Width - 3, pictureBox1.Height - 3);
+            gp.AddEllipse(0, 0, ProfilePictureBox.Width - 3, ProfilePictureBox.Height - 3);
             Region rg = new Region(gp);
-            pictureBox1.Region = rg;
-            pictureBox1.Image = Image.FromFile(GetUserTilePath(userNameText.Split('\\')[1]));
+            ProfilePictureBox.Region = rg;
+            ProfilePictureBox.Image = Image.FromFile(GetUserTilePath(userNameText.Split('\\')[1]));
 
             foreach (var screen in Screen.AllScreens)
             {
@@ -143,7 +143,7 @@ namespace WindowsFormsApp9
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(textBox2);
+            Console.WriteLine(PasswordTextBox);
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
