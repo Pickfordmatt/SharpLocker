@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp9
+﻿namespace SharpLocker
 {
     partial class Form1
     {
@@ -81,7 +81,7 @@
             this.ProfileIcon.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ProfileIcon.BackColor = System.Drawing.Color.Transparent;
             this.ProfileIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ProfileIcon.Image = global::WindowsFormsApp9.Properties.Resources.thumb_14400082930User;
+            this.ProfileIcon.Image = global::SharpLocker.Properties.Resources.thumb_14400082930User;
             this.ProfileIcon.Location = new System.Drawing.Point(345, 31);
             this.ProfileIcon.Name = "ProfileIcon";
             this.ProfileIcon.Size = new System.Drawing.Size(199, 199);
@@ -95,7 +95,7 @@
             this.SubmitPasswordButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.SubmitPasswordButton.AutoSize = true;
             this.SubmitPasswordButton.BackColor = System.Drawing.Color.Transparent;
-            this.SubmitPasswordButton.BackgroundImage = global::WindowsFormsApp9.Properties.Resources.arrow;
+            this.SubmitPasswordButton.BackgroundImage = global::SharpLocker.Properties.Resources.arrow;
             this.SubmitPasswordButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.SubmitPasswordButton.Location = new System.Drawing.Point(597, 324);
             this.SubmitPasswordButton.Name = "SubmitPasswordButton";

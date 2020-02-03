@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace WindowsFormsApp9
+namespace SharpLocker
 {
     public partial class Form1 : Form
     {
