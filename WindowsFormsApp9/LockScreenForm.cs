@@ -30,7 +30,8 @@ namespace WindowsFormsApp9
         {
             InitializeComponent();
             Taskbar.Hide();
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+
+            FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Normal;
             StartPosition = FormStartPosition.Manual;
             Location = new Point(0, 0);
@@ -53,7 +54,7 @@ namespace WindowsFormsApp9
             int buttonh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 64;
             int usernameh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 50;
             int locked = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 57;
-            int bottomname = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 95;
+
             PasswordTextBox.Top = usernameloch;
             ProfilePictureBox.Top = usericonh;
             LoginButton.Top = buttonh;
@@ -104,7 +105,7 @@ namespace WindowsFormsApp9
                         form.WindowState = FormWindowState.Normal;
                         form.StartPosition = FormStartPosition.Manual;
                         form.Location = new Point(mostLeft, mostTop);
-                        form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                        form.FormBorderStyle = FormBorderStyle.None;
                         form.Size = new Size(screen.Bounds.Width, screen.Bounds.Height);
                         form.BackColor = Color.Black;
                         form.ShowDialog();
@@ -146,16 +147,10 @@ namespace WindowsFormsApp9
             Console.WriteLine(PasswordTextBox);
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-            Taskbar.Show();
-            System.Windows.Forms.Application.Exit();
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             Taskbar.Show();
-            System.Windows.Forms.Application.Exit();
+            Application.Exit();
         }
     }
     
