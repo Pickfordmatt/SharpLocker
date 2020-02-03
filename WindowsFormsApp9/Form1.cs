@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Linq;
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
 using System.IO;
 
 namespace WindowsFormsApp9
@@ -18,22 +13,17 @@ namespace WindowsFormsApp9
     public partial class Form1 : Form
     {
         [DllImport("shell32.dll", EntryPoint = "#261",
-               CharSet = CharSet.Unicode, PreserveSig = false)]
+        CharSet = CharSet.Unicode, PreserveSig = false)]
         public static extern void GetUserTilePath(
-      string username,
-      UInt32 whatever, // 0x80000000
-      StringBuilder picpath, int maxLength);
+        string username,
+        UInt32 whatever, // 0x80000000
+        StringBuilder picpath, int maxLength);
 
         public static string GetUserTilePath(string username)
         {   // username: use null for current user
             var sb = new StringBuilder(1000);
             GetUserTilePath(username, 0x80000000, sb, sb.Capacity);
             return sb.ToString();
-        }
-
-        public static Image GetUserTile(string username)
-        {
-            return Image.FromFile(GetUserTilePath(username));
         }
 
         public Form1()
@@ -82,7 +72,7 @@ namespace WindowsFormsApp9
             gp.AddEllipse(0, 0, pictureBox1.Width - 3, pictureBox1.Height - 3);
             Region rg = new Region(gp);
             pictureBox1.Region = rg;
-            pictureBox1.Image = GetUserTile(userNameText.Split('\\')[1]);
+            pictureBox1.Image = Image.FromFile(GetUserTilePath(userNameText.Split('\\')[1]));
 
             foreach (var screen in Screen.AllScreens)
             {
@@ -92,59 +82,6 @@ namespace WindowsFormsApp9
             }
 
 
-        }
-
-        public class Taskbar
-        {
-            [DllImport("user32.dll")]
-            private static extern int FindWindow(string className, string windowText);
-
-            [DllImport("user32.dll")]
-            private static extern int ShowWindow(int hwnd, int command);
-
-            [DllImport("user32.dll")]
-            public static extern int FindWindowEx(int parentHandle, int childAfter, string className, int windowTitle);
-
-            [DllImport("user32.dll")]
-            private static extern int GetDesktopWindow();
-
-            private const int SW_HIDE = 0;
-            private const int SW_SHOW = 1;
-
-            protected static int Handle
-            {
-                get
-                {
-                    return FindWindow("Shell_TrayWnd", "");
-                }
-            }
-
-            protected static int HandleOfStartButton
-            {
-                get
-                {
-                    int handleOfDesktop = GetDesktopWindow();
-                    int handleOfStartButton = FindWindowEx(handleOfDesktop, 0, "button", 0);
-                    return handleOfStartButton;
-                }
-            }
-
-            private Taskbar()
-            {
-                // hide ctor
-            }
-
-            public static void Show()
-            {
-                ShowWindow(Handle, SW_SHOW);
-                ShowWindow(HandleOfStartButton, SW_SHOW);
-            }
-
-            public static void Hide()
-            {
-                ShowWindow(Handle, SW_HIDE);
-                ShowWindow(HandleOfStartButton, SW_HIDE);
-            }
         }
 
         public void WorkThreadFunction(Screen screen)
@@ -181,22 +118,6 @@ namespace WindowsFormsApp9
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected override CreateParams CreateParams
         {
             get
@@ -223,11 +144,6 @@ namespace WindowsFormsApp9
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             Console.WriteLine(textBox2);
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
