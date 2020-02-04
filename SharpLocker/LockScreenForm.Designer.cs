@@ -1,6 +1,6 @@
 ﻿namespace SharpLocker
 {
-    partial class Form1
+    partial class LockScreenForm
     {
         /// <summary>
         /// Required designer variable.
@@ -104,7 +104,7 @@
             this.SubmitPasswordButton.UseVisualStyleBackColor = false;
             this.SubmitPasswordButton.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // Form1
+            // LockScreenForm
             // 
             this.AcceptButton = this.SubmitPasswordButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -115,8 +115,8 @@
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.UserNameLabel);
             this.Controls.Add(this.ProfileIcon);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "LockScreenForm";
+            this.Text = "LockScreenForm";
             ((System.ComponentModel.ISupportInitialize)(this.ProfileIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
