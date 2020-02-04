@@ -13,9 +13,9 @@ using System.Runtime.InteropServices;
 
 namespace SharpLocker
 {
-    public partial class Form1 : Form
+    public partial class LockScreenForm : Form
     {
-        public Form1()
+        public LockScreenForm()
         {
             InitializeComponent();
             Taskbar.Hide();
