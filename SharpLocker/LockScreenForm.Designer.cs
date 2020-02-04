@@ -49,7 +49,6 @@
             this.UserNameLabel.TabIndex = 4;
             this.UserNameLabel.Text = "label2";
             this.UserNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.UserNameLabel.Click += new System.EventHandler(this.UserNameLabel_Click);
             // 
             // PasswordTextBox
             // 
@@ -74,7 +73,6 @@
             this.LockedLabel.Size = new System.Drawing.Size(71, 25);
             this.LockedLabel.TabIndex = 8;
             this.LockedLabel.Text = "Locked";
-            this.LockedLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // ProfileIcon
             // 
@@ -88,7 +86,6 @@
             this.ProfileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ProfileIcon.TabIndex = 1;
             this.ProfileIcon.TabStop = false;
-            this.ProfileIcon.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // SubmitPasswordButton
             // 
@@ -102,7 +99,7 @@
             this.SubmitPasswordButton.Size = new System.Drawing.Size(45, 38);
             this.SubmitPasswordButton.TabIndex = 9;
             this.SubmitPasswordButton.UseVisualStyleBackColor = false;
-            this.SubmitPasswordButton.Click += new System.EventHandler(this.button1_Click_1);
+            this.SubmitPasswordButton.Click += new System.EventHandler(this.SubmitPasswordButton_Click);
             // 
             // LockScreenForm
             // 
