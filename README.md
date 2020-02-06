@@ -7,9 +7,10 @@ SharpLocker helps get current user credentials by popping a fake Windows lock sc
 * Windows 10
 * Main monitor needs to be 1080p otherwise the location of the elements are wrong
 
-![Working SharpLocker](https://github.com/Pickfordmatt/SharpLocker/blob/master/sharplocker.png?raw=true)
+![Working SharpLocker](https://github.com/Pickfordmatt/SharpLocker/raw/master/sharplocker.png?raw=true)
 
 ## How to
 * Compile SharpLocker from source via VisualStudio etc
 * Within a Cobalt Strike implant run execute-assembly C:/{location of exe}
 * Pray and wait for creds
+

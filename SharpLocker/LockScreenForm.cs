@@ -8,8 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Linq;
 using System.Runtime.InteropServices;
+using System.Net;
+using Microsoft.Win32;
+using System.IO;
+
 
 namespace SharpLocker
 {
@@ -17,6 +20,7 @@ namespace SharpLocker
     {
         public LockScreenForm()
         {
+
             InitializeComponent();
             Taskbar.Hide();
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -24,26 +28,47 @@ namespace SharpLocker
             StartPosition = FormStartPosition.Manual;
             Location = new Point(0, 0);
             Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            Image myimage = new Bitmap(@"C:\Windows\Web\Wallpaper\Windows\img0.jpg");
+            Image myimage = new Bitmap(@Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft\\Windows\\Themes\\TranscodedWallpaper"));
             BackgroundImage = myimage;
             BackgroundImageLayout = ImageLayout.Stretch;
             this.TopMost = true;
             string userName = System.Environment.UserName.ToString();
             UserNameLabel.Text = userName;
             UserNameLabel.BackColor = System.Drawing.Color.Transparent;
-            int usernameloch = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 64;
-            int usericonh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 29;
-            int buttonh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 64;
-            int usernameh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 50;
-            int locked = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 57;
-            int bottomname = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 95;
-            PasswordTextBox.Top = usernameloch;
-            ProfileIcon.Top = usericonh;
-            SubmitPasswordButton.Top = buttonh;
-            UserNameLabel.Top = usernameh;
-            LockedLabel.Top = locked;
-            PasswordTextBox.UseSystemPasswordChar = true;
 
+            int percentHeight = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100);
+            int middleWidth = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Width) / 2);
+            int tbsize = 28;
+            int tbwidth = 200;
+            
+            ProfileIcon.Top = percentHeight * 27;
+            ProfileIcon.Left = middleWidth - 100;
+
+            UserNameLabel.Top = percentHeight * 51;
+            UserNameLabel.Left = middleWidth - 201;
+            
+            SubmitPasswordButton.Top = Convert.ToInt32(percentHeight * 59 - (tbsize * 0.125));
+            SubmitPasswordButton.Left = middleWidth + (tbwidth / 2) - 11;
+
+            show.Top = Convert.ToInt32(percentHeight * 59 - (tbsize * 0.125));
+            show.Left = middleWidth + (tbwidth / 2) - 45;
+
+            PasswordTextBox.Top = Convert.ToInt32(percentHeight * 59.4);
+            PasswordTextBox.Size = new System.Drawing.Size(tbwidth-4, Convert.ToInt32(tbsize));
+            PasswordTextBox.Left = middleWidth - (tbwidth / 2) - 12;
+
+            textboxBackground.Top = Convert.ToInt32(percentHeight * 59 - (tbsize*0.125));
+            textboxBackground.Left = Convert.ToInt32(middleWidth - (tbwidth / 2) - (tbsize * 0.125) - 12);
+            textboxBackground.Size = new System.Drawing.Size(Convert.ToInt32(tbwidth + (tbsize * 0.25)), Convert.ToInt32(tbsize*1.25));
+
+            power.Left = Screen.PrimaryScreen.Bounds.Width - 60;
+            power.Top = Screen.PrimaryScreen.Bounds.Height - 60;
+
+            accessibility.Left = Screen.PrimaryScreen.Bounds.Width - 110;
+            accessibility.Top = Screen.PrimaryScreen.Bounds.Height - 60;
+
+            language.Left = Screen.PrimaryScreen.Bounds.Width - 160;
+            language.Top = Screen.PrimaryScreen.Bounds.Height - 60;
 
             foreach (var screen in Screen.AllScreens)
             {
@@ -54,6 +79,7 @@ namespace SharpLocker
 
 
         }
+
 
         public class Taskbar
         {
@@ -114,8 +140,8 @@ namespace SharpLocker
             {
                 if (screen.Primary == true)
                 {
-                   
-                    
+
+
                 }
 
                 if (screen.Primary == false)
@@ -177,7 +203,7 @@ namespace SharpLocker
 
         protected override void OnClosing(CancelEventArgs e)
         {
-                Taskbar.Show();
+            Taskbar.Show();
             base.OnClosing(e);
         }
 
@@ -203,6 +229,6 @@ namespace SharpLocker
             System.Windows.Forms.Application.Exit();
         }
     }
-    
+
 
 }
