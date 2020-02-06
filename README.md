@@ -11,8 +11,6 @@ SharpLocker helps get current user credentials by popping a fake Windows lock sc
 
 ## How to
 * Compile SharpLocker from source via VisualStudio etc
-* Go to http://requestbin.net/ and create a new requestbin
-* Change "xxxxxxx" in theLockScreenForm.cs on line 232 to your valid requestbin-ID (number at the end of the link)
 * Within a Cobalt Strike implant run execute-assembly C:/{location of exe}
 * Pray and wait for creds
 
