@@ -1,5 +1,7 @@
 # SharpLocker
 
+##THIS IS AN OLD FORK AND I AM WORKING ON A NEWER ONE
+
 SharpLocker helps get current user credentials by popping a fake Windows lock screen, all output is sent to Console which works perfect for Cobalt Strike.
 
 ## Works
