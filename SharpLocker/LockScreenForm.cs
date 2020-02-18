@@ -86,8 +86,8 @@ namespace SharpLocker
              * Normally the larger image present in this directory is the current lock screen image. */
             string img_name = "";
             
-            //Save image path plus extension
-            string new_jpg_path = "";
+            //Save image full path
+            string img_path = "";
             
             DirectoryInfo folderInfo = new DirectoryInfo(spotlight_dir_path);
             long largestSize = 0;
@@ -99,13 +99,9 @@ namespace SharpLocker
                     img_name = fi.Name;
                 }
             }
+            img_path = Path.Combine(spotlight_dir_path, img_name);
 
-            new_jpg_path = Path.Combine(spotlight_dir_path, img_name + ".jpg");
-
-            if(!File.Exists(new_jpg_path)) //prevent copy error after multiples app runs
-                File.Copy(Path.Combine(spotlight_dir_path, img_name), new_jpg_path);
-
-            return new_jpg_path;
+            return img_path;
         }
 
         protected override CreateParams CreateParams
