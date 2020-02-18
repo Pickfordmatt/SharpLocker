@@ -67,7 +67,6 @@
             this.PasswordTextBox.Size = new System.Drawing.Size(325, 20);
             this.PasswordTextBox.TabIndex = 6;
             this.PasswordTextBox.UseSystemPasswordChar = true;
-            this.PasswordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // LockedLabel

