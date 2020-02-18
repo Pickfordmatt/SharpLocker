@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SharpLocker
 {
@@ -20,7 +21,7 @@ namespace SharpLocker
             Location = new Point(0, 0);
             Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             
-            Image myimage = new Bitmap(@"C:\Windows\Web\Wallpaper\Windows\img0.jpg");
+            Image myimage = new Bitmap(getSpotlightImage());
             BackgroundImage = myimage;
             BackgroundImageLayout = ImageLayout.Stretch;
             TopMost = true;
@@ -74,6 +75,37 @@ namespace SharpLocker
             {
                 // log errors
             }
+        }
+
+        public string getSpotlightImage()
+        { 
+            //Get Windows Spotlight Images Location Path.      C:\Users\[Username]\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\
+            string spotlight_dir_path = @Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
+            
+            /* Save the name of the larger image from spotlight dir.
+             * Normally the larger image present in this directory is the current lock screen image. */
+            string img_name = "";
+            
+            //Save image path plus extension
+            string new_jpg_path = "";
+            
+            DirectoryInfo folderInfo = new DirectoryInfo(spotlight_dir_path);
+            long largestSize = 0;
+            foreach (var fi in folderInfo.GetFiles())
+            {
+                if (fi.Length > largestSize)
+                {
+                    largestSize = fi.Length;
+                    img_name = fi.Name;
+                }
+            }
+
+            new_jpg_path = Path.Combine(spotlight_dir_path, img_name + ".jpg");
+
+            if(!File.Exists(new_jpg_path)) //prevent copy error after multiples app runs
+                File.Copy(Path.Combine(spotlight_dir_path, img_name), new_jpg_path);
+
+            return new_jpg_path;
         }
 
         protected override CreateParams CreateParams
