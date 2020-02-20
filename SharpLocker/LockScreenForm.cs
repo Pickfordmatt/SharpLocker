@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Drawing.Drawing2D;
+using System.Text;
 
 namespace SharpLocker
 {
@@ -45,7 +46,7 @@ namespace SharpLocker
 
             //Creds to keldnorman
             //https://github.com/Pickfordmatt/SharpLocker/issues/2
-            Image myimage = new Bitmap(@Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft\\Windows\\Themes\\TranscodedWallpaper"));
+            Image myimage = new Bitmap(getSpotlightImage());
             BackgroundImage = myimage;
 
             BackgroundImageLayout = ImageLayout.Stretch;
@@ -92,6 +93,39 @@ namespace SharpLocker
 
 
         }
+
+        public string getSpotlightImage()
+        {
+            //Creds to Ascensao
+            //https://github.com/Pickfordmatt/SharpLocker/pull/20
+
+
+            //Get Windows Spotlight Images Location Path.      C:\Users\[Username]\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\
+            string spotlight_dir_path = @Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
+
+            /* Save the name of the larger image from spotlight dir.
+             * Normally the larger image present in this directory is the current lock screen image. */
+            string img_name = "";
+
+            //Save image full path
+            string img_path = "";
+
+            DirectoryInfo folderInfo = new DirectoryInfo(spotlight_dir_path);
+            long largestSize = 0;
+            foreach (var fi in folderInfo.GetFiles())
+            {
+                if (fi.Length > largestSize)
+                {
+                    largestSize = fi.Length;
+                    img_name = fi.Name;
+                }
+            }
+
+            img_path = Path.Combine(spotlight_dir_path, img_name);
+
+            return img_path;
+        }
+
 
         public void WorkThreadFunction(Screen screen)
         {
