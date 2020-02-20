@@ -15,7 +15,7 @@ SharpLocker helps get current user credentials by popping a fake Windows lock sc
 * Main monitor needs to be 1080p otherwise the location of the elements are wrong
 * With any background and profile picture
 
-![Working SharpLocker](https://github.com/Ascensao/SharpLocker/blob/master/ba-sharpLocker-gui-printscreen.png)
+![Working SharpLocker](https://github.com/3top1a/SharpLocker/blob/master/SharpLocker_example.png)
 
 # How to
 * Compile SharpLocker from source via VisualStudio etc
