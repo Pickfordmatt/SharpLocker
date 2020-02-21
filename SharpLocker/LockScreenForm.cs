@@ -89,6 +89,18 @@ namespace SharpLocker
             language.Left = Screen.PrimaryScreen.Bounds.Width - 160;
             language.Top = Screen.PrimaryScreen.Bounds.Height - 60;
 
+            if (!PasswordTextBox.Focus())
+            {
+                PasswordTextBox.Focus();
+            }
+
+            ActiveControl = PasswordTextBox;
+
+            if (CanFocus)
+            {
+                Focus();
+            }
+            
             foreach (var screen in Screen.AllScreens)
             {
 
