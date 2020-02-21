@@ -1,4 +1,7 @@
-﻿namespace SharpLocker
+﻿using SharpLocker;
+using System.Windows.Forms;
+
+namespace SharpLocker
 {
     partial class LockScreenForm
     {
@@ -213,6 +216,7 @@
             this.Controls.Add(this.textboxBackground);
             this.Name = "LockScreenForm";
             this.Text = "LockScreenForm";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.ProfileIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

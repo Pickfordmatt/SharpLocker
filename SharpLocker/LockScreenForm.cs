@@ -17,7 +17,7 @@ namespace SharpLocker
         CharSet = CharSet.Unicode, PreserveSig = false)]
         public static extern void GetUserTilePath(
         string username,
-        UInt32 whatever, // 0x80000000
+        uint whatever, // 0x80000000
         StringBuilder picpath, int maxLength);
 
         public static string GetUserTilePath(string username)
@@ -100,7 +100,18 @@ namespace SharpLocker
             {
                 Focus();
             }
-            
+
+            //Get the username. This returns Domain\Username
+            string userNameText = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
+            //https://stackoverflow.com/questions/7731855/rounded-edges-in-picturebox-c-sharp
+            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            gp.AddEllipse(0, 0, ProfileIcon.Width - 3, ProfileIcon.Height - 3);
+            Region rg = new Region(gp);
+            ProfileIcon.Region = rg;
+            ProfileIcon.Image = Image.FromFile(GetUserTilePath(userNameText.Split('\\')[1]));
+
+
             foreach (var screen in Screen.AllScreens)
             {
 
@@ -148,17 +159,13 @@ namespace SharpLocker
             /* Save the name of the larger image from spotlight dir.
              * Normally the larger image present in this directory is the current lock screen image. */
             string img_name = "";
-
-            //Save image full path
-            string img_path = "";
-
             DirectoryInfo folderInfo = new DirectoryInfo(spotlight_dir_path);
             long largestSize = 0;
             foreach (var fi in folderInfo.GetFiles())
             {
                 // log errors
                 Taskbar.Show();
-                System.Windows.Forms.Application.Exit();
+                Application.Exit();
 
                 if (fi.Length > largestSize)
                 {
@@ -166,8 +173,8 @@ namespace SharpLocker
                     img_name = fi.Name;
                 }
             }
-            img_path = Path.Combine(spotlight_dir_path, img_name);
-
+            //Save image full path
+            string img_path = Path.Combine(spotlight_dir_path, img_name);
             return img_path;
         }
 
@@ -204,6 +211,5 @@ namespace SharpLocker
             Taskbar.Show();
             Application.Exit();
         }
-
     }
 }
