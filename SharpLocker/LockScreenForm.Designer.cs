@@ -1,4 +1,5 @@
 ﻿using SharpLocker;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace SharpLocker
@@ -41,7 +42,11 @@ namespace SharpLocker
             this.accessibility = new System.Windows.Forms.Button();
             this.show = new System.Windows.Forms.Button();
             this.power = new System.Windows.Forms.Button();
-            this.ProfileIcon = new System.Windows.Forms.PictureBox();
+            this.ProfileIcon = new CustomPictureBox()
+            {
+                InterpolationMode = InterpolationMode.HighQualityBilinear,
+                SmoothingMode = SmoothingMode.AntiAlias,
+            };
             ((System.ComponentModel.ISupportInitialize)(this.ProfileIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -198,6 +203,7 @@ namespace SharpLocker
             this.ProfileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ProfileIcon.TabIndex = 1;
             this.ProfileIcon.TabStop = false;
+            this.ProfileIcon.InterpolationMode = InterpolationMode.HighQualityBicubic;
             // 
             // LockScreenForm
             // 
@@ -224,7 +230,7 @@ namespace SharpLocker
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox ProfileIcon;
+        private CustomPictureBox ProfileIcon;
         private System.Windows.Forms.Label UserNameLabel;
         private System.Windows.Forms.TextBox PasswordTextBox;
         private System.Windows.Forms.Label LockedLabel;

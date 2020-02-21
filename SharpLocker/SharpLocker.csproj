@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DataExtractor.cs" />
     <Compile Include="LockScreenForm.cs">
       <SubType>Form</SubType>
