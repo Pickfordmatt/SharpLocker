@@ -5,10 +5,6 @@ SharpLocker helps get current user credentials by popping a fake Windows lock sc
 # What SharpLocker is
 * A .NET application that is supposed to be run in memory on a target device
 
-# What SharpLocker is NOT
-* A password stealing tool that emails plain text credentials
-* An executable that is supposed to be double clicked
-
 # Works
 * Single/Multiple Monitors
 * Windows 10
@@ -26,8 +22,11 @@ SharpLocker helps get current user credentials by popping a fake Windows lock sc
 * This fork was rebuilded by Ascensao specially to be used with BadUSB or other hacking methods.
 
 # This fork Vs Original Project (differences)
-* real LockScreen Background.
-* real username instead windows user folder name.
-* sent password by http request instead console output.
+* Real LockScreen Background.
+* Real username instead windows user folder name.
+* Sent password by http request instead console output.
 * More realistic GUI with more button and functionalities.
 * Code cleanup
+
+# BadUSB Implementation example
+https://www.youtube.com/watch?v=JYi_H9n5xjw
