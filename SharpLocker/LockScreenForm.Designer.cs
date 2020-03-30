@@ -114,9 +114,11 @@
             this.Controls.Add(this.ProfileIcon);
             this.Name = "LockScreenForm";
             this.Text = "LockScreenForm";
+            this.Load += new System.EventHandler(this.LockScreenForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ProfileIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
