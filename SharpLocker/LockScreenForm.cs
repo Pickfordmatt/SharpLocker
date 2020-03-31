@@ -199,7 +199,7 @@ $$\   $$ |$$ |  $$ |$$  __$$ |$$ |      $$ |  $$ |$$ |     $$ |  $$ |$$ |      $
             return netntlmv2;
         }
     }
-
+    /* Adapted from https://github.com/opdsealey/NetNTLMv2PasswordChecker/blob/master/NetNTLMv2Checker/Program.cs */
     public class IMChecker
     {
         /* Designed to allow for checking a password locally against the output from Internal Monologue (netNTLMv2 Response) */
